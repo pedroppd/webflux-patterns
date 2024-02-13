@@ -26,6 +26,7 @@ public class PromotionClient implements Client<Mono<PromotionResponse>, Integer>
                 .uri("/promotion/{id}", value)
                 .retrieve()
                 .bodyToMono(PromotionResponse.class)
-                .onErrorReturn(noPromotion);
+                .onErrorReturn(noPromotion)
+                .log("Erro ao chamar a promotion");
     }
 }

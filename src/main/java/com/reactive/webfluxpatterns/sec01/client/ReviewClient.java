@@ -24,6 +24,7 @@ public class ReviewClient implements Client<Mono<List<Review>>, Integer>{
                 .retrieve()
                 .bodyToFlux(Review.class)
                 .collectList()
-                .onErrorReturn(Collections.emptyList());
+                .onErrorReturn(Collections.emptyList())
+                .log("Erro ao chamar a review");
     }
 }

@@ -14,7 +14,6 @@ public class ProductClient implements Client<Mono<ProductResponse>, Integer> {
 
     public ProductClient(@Value("${sec01.product.service}") String url) {
         this.client = WebClient.builder().baseUrl(url).build();
-
     }
 
     @Override
