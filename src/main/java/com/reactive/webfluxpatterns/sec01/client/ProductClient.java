@@ -19,7 +19,7 @@ public class ProductClient implements Client<Mono<ProductResponse>, Integer> {
 
     @Override
     public Mono<ProductResponse> get(Integer value) {
-        return this.client.get().uri("{id}", value)
+        return this.client.get().uri("/product/{id}", value)
                 .retrieve()
                 .bodyToMono(ProductResponse.class)
                 .onErrorResume(ex -> Mono.empty());

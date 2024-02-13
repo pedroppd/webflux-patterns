@@ -2,6 +2,7 @@ package com.reactive.webfluxpatterns.sec01.controller;
 
 import com.reactive.webfluxpatterns.sec01.dto.ProductAggregate;
 import com.reactive.webfluxpatterns.sec01.services.ProductAggregatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("sec01")
 public class ProductAggregatorController {
+    @Autowired
     private ProductAggregatorService service;
     @GetMapping("product/{id}")
     public Mono<ResponseEntity<ProductAggregate>> get(@PathVariable("id") Integer id) {
