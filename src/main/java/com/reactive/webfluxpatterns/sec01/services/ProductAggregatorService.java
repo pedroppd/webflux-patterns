@@ -22,7 +22,7 @@ public class ProductAggregatorService {
     @Autowired
     private ReviewClient reviewClient;
 
-    public Mono<ProductAggregator> aggregate(Integer id) {
+    public Mono<ProductAggregate> aggregate(Integer id) {
         return Mono.zip(
                 productClient.get(id),
                 promotionClient.get(id),
@@ -30,11 +30,11 @@ public class ProductAggregatorService {
         ).map(p -> this.toDTO(p.getT1(), p.getT2(), p.getT3()));
     }
 
-    private ProductAggregator toDTO(ProductResponse product, PromotionResponse promotion, List<Review> reviews) {
+    private ProductAggregate toDTO(ProductResponse product, PromotionResponse promotion, List<Review> reviews) {
         var ammountSaved = (promotion.getDiscount() / 100) * product.getPrice();
         var discountedPrice = product.getPrice() - ammountSaved;
         var price = Price.create(product.getPrice(), promotion.getDiscount(), discountedPrice, ammountSaved, promotion.getEndDate());
-        return ProductAggregator.create(product.getId(),
+        return ProductAggregate.create(product.getId(),
                 product.getCategory(),
                 product.getDescription(),
                 price, reviews);

@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @ToString
 @AllArgsConstructor(staticName = "create")
-public class ProductAggregator {
+public class ProductAggregate {
     private Integer id;
     private String category;
     private String description;
