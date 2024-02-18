@@ -33,10 +33,4 @@ public class Frontier implements Client<Flux<FlightResult>, FlightDTO> {
                 .bodyToFlux(FlightResult.class)
                 .onErrorResume(error -> Mono.empty());
     }
-
-    private void normalize(FlightResult result, String from, String to) {
-        result.setTo(to);
-        result.setFrom(from);
-        result.setAirlane(JETBLUE);
-    }
 }
