@@ -22,11 +22,11 @@ public class JetBlue implements Client<Flux<FlightResult>, FlightDTO> {
     @Override
     public Flux<FlightResult> get(FlightDTO value) {
         return this.client.get()
-                .uri("{from}/{to}", value.from(), value.to())
+                .uri("/jetblue/{from}/{to}", value.from(), value.to())
                 .retrieve()
                 .bodyToFlux(FlightResult.class)
                 .doOnNext(fr -> this.normalize(fr, value.from(), value.to()))
-                .onErrorResume(error -> Mono.empty());
+                .onErrorResume(error -> Flux.empty());
     }
 
     @Override

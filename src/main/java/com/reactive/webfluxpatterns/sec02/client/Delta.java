@@ -20,8 +20,14 @@ public class Delta implements Client<Flux<FlightResult>, FlightDTO>{
     @Override
     public Flux<FlightResult> get(FlightDTO value) {
         return this.client.get()
-                .uri("{from}/{to}", value.from(), value.to())
+                .uri("/delta/{from}/{to}", value.from(), value.to())
                 .retrieve()
-                .bodyToFlux(FlightResult.class).onErrorResume(error -> Mono.empty());
+                .bodyToFlux(FlightResult.class)
+                .onErrorResume(error -> Mono.empty());
+    }
+
+    @Override
+    public Flux<FlightResult> post(FlightDTO value) {
+        return null;
     }
 }

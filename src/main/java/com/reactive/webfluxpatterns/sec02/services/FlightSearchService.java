@@ -6,10 +6,12 @@ import com.reactive.webfluxpatterns.sec02.client.JetBlue;
 import com.reactive.webfluxpatterns.sec02.dto.FlightDTO;
 import com.reactive.webfluxpatterns.sec02.dto.FlightResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
+@Component
 public class FlightSearchService {
 
     @Autowired
@@ -19,7 +21,7 @@ public class FlightSearchService {
     @Autowired
     private Frontier frontier;
 
-    private static final Long DURATION = 3L;
+    private static final Long DURATION = 5L;
 
     public Flux<FlightResult> search(String from, String to) {
         return Flux.merge(
