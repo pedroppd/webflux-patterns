@@ -12,7 +12,6 @@ import reactor.core.publisher.Flux;
 @RestController
 @RequestMapping("sec02")
 public class FlightController {
-
     @Autowired
     private FlightSearchService service;
 
@@ -20,6 +19,4 @@ public class FlightController {
     public Flux<FlightResult> get(@PathVariable(name = "from") String from, @PathVariable(name = "to") String to) {
         return service.search(from, to);
     }
-
-
 }
