@@ -34,6 +34,6 @@ public class ShippingClient {
         return ShippingResponse.create(shippingRequest.getOrderId(),
                 shippingRequest.getQuantity(),
                 Status.FAILED,
-                "", Address.create("", "", "", ""));
+                null, null);
     }
 }
