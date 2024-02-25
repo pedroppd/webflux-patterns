@@ -2,6 +2,7 @@ package com.reactive.webfluxpatterns.sec03.client;
 
 import com.reactive.webfluxpatterns.sec03.dto.PaymentRequest;
 import com.reactive.webfluxpatterns.sec03.dto.PaymentResponse;
+import com.reactive.webfluxpatterns.sec03.dto.Product;
 import com.reactive.webfluxpatterns.sec03.dto.Status;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
