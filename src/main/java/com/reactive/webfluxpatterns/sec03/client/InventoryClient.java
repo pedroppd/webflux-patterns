@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 public class InventoryClient {
     private final WebClient webClient;
 
-    public InventoryClient(@Value("${sec03.user.service}") String baseUrl) {
+    public InventoryClient(@Value("${sec03.investory.service}") String baseUrl) {
         this.webClient = WebClient.builder().baseUrl(baseUrl).build();
     }
 
