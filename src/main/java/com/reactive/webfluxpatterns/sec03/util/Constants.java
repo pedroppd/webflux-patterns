@@ -5,6 +5,4 @@ public class Constants {
     public static final String REFUND = "refund";
     public static final String SCHEDULE = "schedule";
     public static final String DEDUCT = "deduct";
-
-
 }
