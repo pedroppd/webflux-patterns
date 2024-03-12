@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
+import static com.reactive.webfluxpatterns.sec03.util.Constants.SCHEDULE;
+
 @Service
 public class ShippingClient {
 
@@ -16,11 +19,11 @@ public class ShippingClient {
     }
 
     public Mono<ShippingResponse> schedule(ShippingRequest shippingRequest) {
-        return this.call(shippingRequest, "schedule");
+        return this.call(shippingRequest, SCHEDULE);
     }
 
     public Mono<ShippingResponse> restore(ShippingRequest shippingRequest) {
-        return this.call(shippingRequest, "restore");
+        return this.call(shippingRequest, RESTORE);
     }
 
     public Mono<ShippingResponse> call(ShippingRequest shippingRequest, String endpoint) {

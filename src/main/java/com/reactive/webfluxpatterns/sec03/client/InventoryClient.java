@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import static com.reactive.webfluxpatterns.sec03.util.Constants.REFUND;
+import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
+
 @Service
 public class InventoryClient {
     private final WebClient webClient;
@@ -15,11 +18,11 @@ public class InventoryClient {
     }
 
     public Mono<InventoryResponse> deduct(InventoryRequest inventoryRequest) {
-        return this.call(inventoryRequest, "restore");
+        return this.call(inventoryRequest, RESTORE);
     }
 
     public Mono<InventoryResponse> refund(InventoryRequest inventoryRequest) {
-        return this.call(inventoryRequest, "refund");
+        return this.call(inventoryRequest, REFUND);
     }
 
     public Mono<InventoryResponse> call(InventoryRequest inventoryRequest, String endpoint) {
