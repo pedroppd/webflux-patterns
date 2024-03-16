@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderFulfillmentService {
-
     @Autowired
     private List<Orchestrator> orchestrators;
 
