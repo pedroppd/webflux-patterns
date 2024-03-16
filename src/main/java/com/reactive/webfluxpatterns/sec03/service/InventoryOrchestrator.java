@@ -1,37 +1,38 @@
 package com.reactive.webfluxpatterns.sec03.service;
 
-import com.reactive.webfluxpatterns.sec03.client.UserClient;
+import com.reactive.webfluxpatterns.sec03.client.InventoryClient;
 import com.reactive.webfluxpatterns.sec03.dto.OrchestrationRequestContext;
 import com.reactive.webfluxpatterns.sec03.dto.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class PaymentOrchestrator extends Orchestrator {
+public class InventoryOrchestrator extends Orchestrator {
     @Autowired
-    private UserClient client;
+    private InventoryClient client;
 
     @Override
     public Mono<OrchestrationRequestContext> create(OrchestrationRequestContext ctx) {
-        return this.client.deduct(ctx.getPaymentRequest())
-                .doOnNext(ctx::setPaymentResponse)
+        return this.client.deduct(ctx.getInventoryRequest())
+                .doOnNext(ctx::setInventoryResponse)
                 .thenReturn(ctx);
     }
 
     @Override
     public Predicate<OrchestrationRequestContext> isSuccess() {
-        return ctx -> Status.SUCCESS.equals(ctx.getPaymentResponse().getStatus());
+        return ctx -> Status.SUCCESS.equals(ctx.getInventoryResponse().getStatus());
     }
 
     @Override
     public Consumer<OrchestrationRequestContext> cancel() {
         return ctx -> Mono.just(ctx)
                 .filter(isSuccess())
-                .map(OrchestrationRequestContext::getPaymentRequest)
-                .flatMap(this.client::refund)
+                .map(OrchestrationRequestContext::getInventoryRequest)
+                .flatMap(this.client::restore)
                 .subscribeOn(Schedulers.boundedElastic());
     }
 }

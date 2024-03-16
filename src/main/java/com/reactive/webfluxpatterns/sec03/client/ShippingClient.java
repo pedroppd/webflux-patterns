@@ -6,37 +6,44 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
-import static com.reactive.webfluxpatterns.sec03.util.Constants.SCHEDULE;
+import static com.reactive.webfluxpatterns.sec03.util.Constants.*;
 
 @Service
 public class ShippingClient {
 
-    private final WebClient webClient;
+    private final WebClient client;
 
-    public ShippingClient(@Value("${sec03.shipping.service}") String baseUrl) {
-        this.webClient = WebClient.builder().baseUrl(baseUrl).build();
+    public ShippingClient(@Value("${sec03.shipping.service}") String baseUrl){
+        this.client = WebClient.builder()
+                .baseUrl(baseUrl)
+                .build();
     }
 
-    public Mono<ShippingResponse> schedule(ShippingRequest shippingRequest) {
-        return this.call(shippingRequest, SCHEDULE);
+    public Mono<ShippingResponse> schedule(ShippingRequest request){
+        return this.callShippingService(SCHEDULE, request);
     }
 
-    public Mono<ShippingResponse> restore(ShippingRequest shippingRequest) {
-        return this.call(shippingRequest, RESTORE);
+    public Mono<ShippingResponse> cancel(ShippingRequest request){
+        return this.callShippingService(CANCEL, request);
     }
 
-    public Mono<ShippingResponse> call(ShippingRequest shippingRequest, String endpoint) {
-        return this.webClient.post().uri(endpoint)
-                .bodyValue(shippingRequest).retrieve()
+    private Mono<ShippingResponse> callShippingService(String endPoint, ShippingRequest request){
+        return this.client
+                .post()
+                .uri(endPoint)
+                .bodyValue(request)
+                .retrieve()
                 .bodyToMono(ShippingResponse.class)
-                .onErrorReturn(this.buildErrorResponse(shippingRequest));
+                .onErrorReturn(this.buildErrorResponse(request));
     }
 
-    private ShippingResponse buildErrorResponse(ShippingRequest shippingRequest) {
-        return ShippingResponse.create(shippingRequest.getOrderId(),
-                shippingRequest.getQuantity(),
+    private ShippingResponse buildErrorResponse(ShippingRequest request){
+        return ShippingResponse.create(
+                request.getOrderId(),
+                request.getQuantity(),
                 Status.FAILED,
-                null, null);
+                null,
+                null
+        );
     }
 }
