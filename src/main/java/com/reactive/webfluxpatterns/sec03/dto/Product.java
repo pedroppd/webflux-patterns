@@ -1,12 +1,10 @@
 package com.reactive.webfluxpatterns.sec03.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor(staticName = "create")
 public class Product {
@@ -15,5 +13,4 @@ public class Product {
     private String category;
     private String description;
     private Integer price;
-
 }

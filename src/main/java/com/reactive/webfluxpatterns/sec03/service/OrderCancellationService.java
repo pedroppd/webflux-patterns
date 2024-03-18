@@ -19,7 +19,7 @@ public class OrderCancellationService {
     private List<Orchestrator> orchestrators;
 
     @PostConstruct
-    public void  init(){
+    public void  init() {
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
         this.flux = this.sink.asFlux().publishOn(Schedulers.boundedElastic());
         orchestrators.forEach(o -> this.flux.subscribe(o.cancel()));
