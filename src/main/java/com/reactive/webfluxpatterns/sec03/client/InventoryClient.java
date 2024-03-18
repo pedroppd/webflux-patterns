@@ -12,7 +12,7 @@ import static com.reactive.webfluxpatterns.sec03.util.Constants.*;
 public class InventoryClient {
     private final WebClient webClient;
 
-    public InventoryClient(@Value("${sec03.investory.service}") String baseUrl) {
+    public InventoryClient(@Value("${sec03.inventory.service}") String baseUrl) {
         this.webClient = WebClient.builder().baseUrl(baseUrl).build();
     }
 

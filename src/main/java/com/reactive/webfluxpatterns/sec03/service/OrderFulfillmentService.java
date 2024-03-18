@@ -18,6 +18,7 @@ public class OrderFulfillmentService {
         var list = orchestrators.stream()
                 .map(o -> o.create(ctx))
                 .collect(Collectors.toList());
+
         return Mono.zip(list, a -> a[0])
                 .cast(OrchestrationRequestContext.class)
                 .doOnNext(this::updateStatus);
