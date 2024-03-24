@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
 import static com.reactive.webfluxpatterns.sec03.util.Constants.DEDUCT;
 import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
 
@@ -15,7 +14,7 @@ import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
 public class InventoryClient {
     private final WebClient webClient;
 
-    public InventoryClient(@Value("${sec03.inventory.service}") String baseUrl) {
+    public InventoryClient(@Value("${sec04.inventory.service}") String baseUrl) {
         this.webClient = WebClient.builder().baseUrl(baseUrl).build();
     }
 
