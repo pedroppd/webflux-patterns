@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
 import static com.reactive.webfluxpatterns.sec03.util.Constants.DEDUCT;
 import static com.reactive.webfluxpatterns.sec03.util.Constants.RESTORE;
 
@@ -34,7 +35,7 @@ public class InventoryClient {
     }
 
     private InventoryResponse buildErrorResponse(InventoryRequest paymentRequest) {
-        return InventoryResponse.create(paymentRequest.getProductId(),
+        return InventoryResponse.create(null, paymentRequest.getProductId(),
                 paymentRequest.getQuantity(),
                 null,
                 Status.FAILED);

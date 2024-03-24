@@ -42,7 +42,7 @@ public class ShippingClient {
 
     private ShippingResponse buildErrorResponse(ShippingRequest request){
         return ShippingResponse.create(
-                request.getOrderId(),
+                null,
                 request.getQuantity(),
                 Status.FAILED,
                 null,

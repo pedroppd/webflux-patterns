@@ -36,6 +36,11 @@ public class UserClient {
     }
 
     private PaymentResponse buildErrorResponse(PaymentRequest paymentRequest) {
-        return PaymentResponse.create(paymentRequest.getUserId(), null, paymentRequest.getAmount(), Status.FAILED);
+        return PaymentResponse.create(
+                null,
+                paymentRequest.getUserId(),
+                null,
+                paymentRequest.getAmount(),
+                Status.FAILED);
     }
 }
